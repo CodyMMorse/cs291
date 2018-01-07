@@ -14,8 +14,17 @@ var camera, scene, renderer;
 var windowScale;
 
 function PolygonGeometry(sides) {
+	
+	// Validation
+	if(sides < 3) {
+		throw "Refusing to draw polygon with fewer than three sides."
+	}
+	
 	var geo = new THREE.Geometry();
 
+	// Center of the polygon
+	geo.vertices.push( new THREE.Vector3(0, 0, 0) );
+	
 	// generate vertices
 	for ( var pt = 0 ; pt < sides; pt++ )
 	{
@@ -25,13 +34,19 @@ function PolygonGeometry(sides) {
 		var x = Math.cos( angle );
 		var y = Math.sin( angle );
 
-		// YOUR CODE HERE
-		//Save the vertex location - fill in the code
-
+		//Save the vertex location
+		geo.vertices.push( new THREE.Vector3(x, y, 0) );
 	}
-	// YOUR CODE HERE
+	
+	// Isn't really the minimal number of faces. This will draw one face per side,
+	// but there are some polygons that could be drawn with fewer faces.
 	// Write the code to generate minimum number of faces for the polygon.
-
+	for( var i = 1; i < geo.vertices.length-1; i++ ) {
+		geo.faces.push( new THREE.Face3( i, i+1, 0) );
+	}
+	// Last triangle
+	geo.faces.push( new THREE.Face3( geo.vertices.length-1, 1, 0) );
+	
 	// Return the geometry object
 	return geo;
 }
