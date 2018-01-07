@@ -25,9 +25,27 @@ function exampleTriangle() {
 
 function drawSquare(x1, y1, x2, y2) {
 
+	// Validation that the points actually create a square.
+	var xLen = Math.abs(x1-x2)
+	var yLen = Math.abs(y1-y2)
+	if(xLen != yLen) {
+		// Being pretty verbose about what the problem is to make debugging errors easier.
+		throw "The points (" + x1 + "," + y1 + ") and (" + x2 + "," + y2 + ") do not create a square. " +
+		"The length of the top and bottom are " + xLen + " units and the sides are " + yLen + " units."
+	}
+	
+	// Squares have four points, and so we need to push 4 verticies.
 	var square = new THREE.Geometry();
-	// Your code goes here
-
+	square.vertices.push( new THREE.Vector3(x1, y1, 0) );
+	square.vertices.push( new THREE.Vector3(x1, y2, 0) );
+	square.vertices.push( new THREE.Vector3(x2, y2, 0) );
+	square.vertices.push( new THREE.Vector3(x2, y1, 0) );
+	
+	// This Face3 constructor takes three indices for the vertices array to create a triangle.
+	// I.E - 0,1,2 means that we want to draw a triangle using the 0th, 1st, and 2nd verticies
+	square.faces.push( new THREE.Face3(0, 1, 2) ); // Draws a triangle (i.e - half the square)
+	square.faces.push( new THREE.Face3(2, 3, 0) ); // Draws a triangle (i.e - the other half of the square)
+	
 	// don't forget to return the geometry!	The following line is required!
 	return square;
 }
