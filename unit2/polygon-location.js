@@ -14,7 +14,7 @@ var windowScale;
 
 function PolygonGeometry(sides, location) {
 	var geo = new THREE.Geometry();
-
+	
 	// generate vertices
 	for ( var pt = 0 ; pt < sides; pt++ )
 	{
@@ -25,7 +25,7 @@ function PolygonGeometry(sides, location) {
 		var y = Math.sin( angle );
 
 		// Save the vertex location
-		geo.vertices.push( new THREE.Vector3( x, y, 0.0 ) );
+		geo.vertices.push( new THREE.Vector3( x + location.x, y + location.y, 0.0 ) );
 	}
 
 	// generate faces
