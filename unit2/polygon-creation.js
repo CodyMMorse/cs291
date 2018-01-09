@@ -21,9 +21,6 @@ function PolygonGeometry(sides) {
 	}
 	
 	var geo = new THREE.Geometry();
-
-	// Center of the polygon
-	geo.vertices.push( new THREE.Vector3(0, 0, 0) );
 	
 	// generate vertices
 	for ( var pt = 0 ; pt < sides; pt++ )
@@ -42,10 +39,8 @@ function PolygonGeometry(sides) {
 	// but there are some polygons that could be drawn with fewer faces.
 	// Write the code to generate minimum number of faces for the polygon.
 	for( var i = 1; i < geo.vertices.length-1; i++ ) {
-		geo.faces.push( new THREE.Face3( i, i+1, 0) );
+		geo.faces.push( new THREE.Face3( 0, i, i+1) );
 	}
-	// Last triangle
-	geo.faces.push( new THREE.Face3( geo.vertices.length-1, 1, 0) );
 	
 	// Return the geometry object
 	return geo;
