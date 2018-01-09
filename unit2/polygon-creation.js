@@ -35,9 +35,6 @@ function PolygonGeometry(sides) {
 		geo.vertices.push( new THREE.Vector3(x, y, 0) );
 	}
 	
-	// Isn't really the minimal number of faces. This will draw one face per side,
-	// but there are some polygons that could be drawn with fewer faces.
-	// Write the code to generate minimum number of faces for the polygon.
 	for( var i = 1; i < geo.vertices.length-1; i++ ) {
 		geo.faces.push( new THREE.Face3( 0, i, i+1) );
 	}
