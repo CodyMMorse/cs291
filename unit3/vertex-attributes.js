@@ -13,9 +13,20 @@ function fillScene() {
 	material = new THREE.MeshBasicMaterial( { vertexColors: THREE.VertexColors, side: THREE.DoubleSide } );
 	geometry = new THREE.Geometry();
 
-	// Student: add a colored triangle here
-
-
+	// Add specified vertices
+	geometry.vertices.push( new THREE.Vector3(100, 0, 0) );
+	geometry.vertices.push( new THREE.Vector3(0, 100, 0) );
+	geometry.vertices.push( new THREE.Vector3(0, 0, 100) );
+	
+	// Push the face so we can color it
+	geometry.faces.push( new THREE.Face3(0, 1, 2) );
+	
+	// Might as well just declare the colors inside here since
+	// we wouldn't use the variables for anything else.
+	geometry.faces[0].vertexColors = [ new THREE.Color( 0xFF0000 ),
+									   new THREE.Color( 0x00FF00 ),
+									   new THREE.Color( 0x0000FF )];
+	
 	mesh = new THREE.Mesh( geometry, material );
 
 	scene.add( mesh );
